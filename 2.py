@@ -10,12 +10,11 @@
 class Rational:
 
     def __init__(self, numerator = 1, denominator = 2):
-        if isinstance(numerator, int) and isinstance(denominator, int):
-            self.__numerator = numerator
-            self.__denominator = denominator
-        else:
+        if not(isinstance(numerator, int) and isinstance(denominator, int)):
             raise TypeError("Type Error")
-    
+        self.__numerator = numerator
+        self.__denominator = denominator
+        
 
     def getFraction(self):
         return self.__numerator,'/', self.__denominator 
