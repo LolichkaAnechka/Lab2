@@ -7,49 +7,45 @@ class Rectangle:
     def __init__(self, lenght=1, width=1):
         if not (isinstance(lenght, (int, float)) and isinstance(width, (int, float))):
             raise TypeError("Wrong value type")
+
         if not (lenght > 0 and width >0):
             raise ValueError("Wrong value")
-        self.lenght=lenght
-        self.width=width
+
+        self.lenght, self.width=lenght, width
 
     
     def area(self):
         return self.width*self.lenght
 
-
     def perimeter(self):
         return 2*(self.width + self.lenght)
     
 
-    def getLenght(self):
-        return self.lenght
-
-
-    def getWidth(self):
-        return self.width
+    def getData(self):
+        return {'lenght': self.lenght, 'width': self.width}
     
 
-    def setLenght(self, len):
-        if not (len >= 0.0 and len <=20.0):
+    def setLenght(self, newlenght):
+        if not (newlenght >= 0.0 and newlenght <=20.0):
             raise ValueError("Wrong value")
-        self.lenght = len
+        self.lenght = newlenght
             
     
-    def setWidth(self, wid):
-        if not(wid >= 0.0 and wid <=20.0):
+    def setWidth(self, newwidth):
+        if not(newwidth >= 0.0 and newwidth <=20.0):
             raise ValueError("Wrong value")
-        self.width = wid
+        self.width = newwidth
             
 
 x = Rectangle()
-print(x.getLenght())
+print(x.getData())
 a = Rectangle(13, 15)
 
 print(a.area())
 print(a.perimeter())
 a.setLenght(20.1)
 a.setWidth(18)
-print(a.getLenght())
-print(a.getWidth())
+print(a.getData())
+print(a.getData())
 
 b= Rectangle(-5, -5)

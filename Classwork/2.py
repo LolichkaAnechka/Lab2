@@ -17,7 +17,7 @@ class Rational:
         
 
     def getFraction(self):
-        return self.__numerator,'/', self.__denominator 
+        return f'{self.__numerator} / {self.__denominator}' 
 
 
     def getFloating(self):
@@ -32,6 +32,7 @@ class Rational:
     def sub(self, newnum, newdenom):
         self.__numerator = self.__numerator * newdenom - newnum * self.__denominator
         self.__denominator = self.__denominator * newdenom
+        x.reduced_form(self.__numerator, self.__denominator)
 
 
     def mult(self, newnum, newdenom):
@@ -42,6 +43,17 @@ class Rational:
     def div(self, newnum, newdenom):
         self.__numerator = self.__numerator * newdenom
         self.__denominator = self.__denominator * newnum
+
+
+    def reduced_form(self, numer, denom):
+        while numer%denom != 0:
+            old_numer = numer              
+            old_denom = denom               
+
+            numer = old_denom               
+            denom = old_numer % old_denom     
+        self.__numerator//=denom
+        self.__denominator//=denom
 
 
 x=Rational(2, 5)
@@ -58,3 +70,4 @@ x.sub(1, 2)
 
 print(x.getFloating())
 print(x.getFraction())
+
