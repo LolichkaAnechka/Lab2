@@ -15,7 +15,6 @@ class Product:
 
     def __init__(self, new_price: int, new_description: str, new_dimentions: str):
         if not (isinstance(new_price, int) and  isinstance(new_description, str) and isinstance(new_dimentions, str)):
-
             raise TypeError("Wrong value type")
         self.price = new_price
         self.description = new_description
@@ -45,6 +44,11 @@ class Customer:
 class Order:
 
     def __init__(self, customer: Customer,  *args:Product):
+        if not isinstance(customer, Customer):
+            raise TypeError("Wrong value type")
+        for i in args:
+            if not isinstance(i, Product):
+                raise TypeError("Wrong value type")
         self.customer = customer
         self.products_ordered = args
 
@@ -61,8 +65,8 @@ class Order:
 
 product1 = Product(500,' Stone', '300x300x300')
 product2 = Product(1000, 'Wood', '300x300x300')
-slava = Customer("Moskalenko", "Slava", "Alexandrovich", '88005553535')
+slava = Customer("Gromyako", "Vitaliy", "Yurevich", '88005553535')
 
 order = Order(slava, product1, product2)
 print(order)
-print(order.count())
+print(f'Full price: {order.count()}')

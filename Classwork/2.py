@@ -6,14 +6,13 @@
 # Provide public methods that perform each of the following tasks:
 # - printing Rational numbers in the form a/b, where a is the numerator and b is the denominator.
 # - printing Rational numbers in floating-point format.
+from math import gcd
 
 class Rational:
 
-    def __init__(self, numerator = 1, denominator = 2):
-        if not(isinstance(numerator, int) and isinstance(denominator, int)):
-            raise TypeError("Type Error")
-        self.__numerator = numerator
-        self.__denominator = denominator
+    def __init__(self, numerator, denominator):
+        self.check(numerator, denominator)
+        self.__numerator, self.__denominator = self.reduced_form(numerator, denominator)
         
 
     def getFraction(self):
@@ -24,36 +23,39 @@ class Rational:
         return self.__numerator/self.__denominator
 
 
-    def add(self, newnum, newdenom):
-        self.__numerator = self.__numerator * newdenom + newnum * self.__denominator
-        self.__denominator = self.__denominator * newdenom
+    def check(self, numer, denom):
+        if not(isinstance(numer, int) and isinstance(denom, int)):
+            raise TypeError("Wrong value type")
+        if not denom:
+            raise ZeroDivisionError
 
 
-    def sub(self, newnum, newdenom):
-        self.__numerator = self.__numerator * newdenom - newnum * self.__denominator
-        self.__denominator = self.__denominator * newdenom
-        x.reduced_form(self.__numerator, self.__denominator)
+    def add(self, newnum:int, newdenom:int):
+        self.check(newnum, newdenom)
+        self.__numerator, self.__denominator = self.reduced_form(
+                self.__numerator * newdenom + newnum * self.__denominator, 
+                self.__denominator * newdenom)
 
 
-    def mult(self, newnum, newdenom):
-        self.__numerator = self.__numerator * newnum
-        self.__denominator = self.__denominator * newdenom
+    def sub(self, newnum:int, newdenom:int):
+        self.check(newnum, newdenom)
+        self.__numerator, self.__denominator = self.reduced_form(
+        self.__numerator * newdenom - newnum * self.__denominator, self.__denominator * newdenom)
 
 
-    def div(self, newnum, newdenom):
-        self.__numerator = self.__numerator * newdenom
-        self.__denominator = self.__denominator * newnum
+    def mult(self, newnum:int, newdenom:int):
+        self.check(newnum, newdenom)
+        self.__numerator, self.__denominator = self.reduced_form(self.__numerator * newnum, self.__denominator * newdenom)
+
+
+    def div(self, newnum:int, newdenom:int):
+        self.mult(newdenom, newnum)
 
 
     def reduced_form(self, numer, denom):
-        while numer%denom != 0:
-            old_numer = numer              
-            old_denom = denom               
+        k = gcd(numer, denom)
+        return numer//k, denom//k
 
-            numer = old_denom               
-            denom = old_numer % old_denom     
-        self.__numerator//=denom
-        self.__denominator//=denom
 
 
 x=Rational(2, 5)
@@ -71,3 +73,12 @@ x.sub(1, 2)
 print(x.getFloating())
 print(x.getFraction())
 
+x.div(4, 5)
+
+print(x.getFloating())
+print(x.getFraction())
+
+x.sub(1, 0)
+
+print(x.getFloating())
+print(x.getFraction())

@@ -1,6 +1,10 @@
+import os
+
 class Text:
     def __init__(self, file_name):
-        file = open(file_name)
+        if not os.path.exists(file_name):
+            raise FileNotFoundError("File not found")
+        file = open (file_name)
         self.text = file.read()
 
 
@@ -14,7 +18,7 @@ class Text:
 
     def count_sentenses(self):
         count = 0
-        for i in [ '!', '?', '...', '. ']:
+        for i in [ '!', '?', '.']:
             count+=self.text.count(i)
         return count
 
