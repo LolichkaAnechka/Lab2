@@ -11,8 +11,8 @@ from math import gcd
 class Rational:
 
     def __init__(self, numerator, denominator):
-        self.check(numerator, denominator)
-        self.__numerator, self.__denominator = self.reduced_form(numerator, denominator)
+        self.__check(numerator, denominator)
+        self.__numerator, self.__denominator = self.__reduced_form(numerator, denominator)
         
 
     def getFraction(self):
@@ -23,36 +23,38 @@ class Rational:
         return self.__numerator/self.__denominator
 
 
-    def check(self, numer, denom):
+    def __check(self, numer, denom):
         if not(isinstance(numer, int) and isinstance(denom, int)):
             raise TypeError("Wrong value type")
         if not denom:
-            raise ZeroDivisionError
+            raise ZeroDivisionError("Division by Zero")
+        return None
 
 
     def add(self, newnum:int, newdenom:int):
-        self.check(newnum, newdenom)
-        self.__numerator, self.__denominator = self.reduced_form(
+        self.__check(newnum, newdenom)
+        self.__numerator, self.__denominator = self.__reduced_form(
                 self.__numerator * newdenom + newnum * self.__denominator, 
                 self.__denominator * newdenom)
 
 
     def sub(self, newnum:int, newdenom:int):
-        self.check(newnum, newdenom)
-        self.__numerator, self.__denominator = self.reduced_form(
-        self.__numerator * newdenom - newnum * self.__denominator, self.__denominator * newdenom)
+        self.__check(newnum, newdenom)
+        self.__numerator, self.__denominator = self.__reduced_form(
+                self.__numerator * newdenom - newnum * self.__denominator, self.__denominator * newdenom)
 
 
     def mult(self, newnum:int, newdenom:int):
-        self.check(newnum, newdenom)
-        self.__numerator, self.__denominator = self.reduced_form(self.__numerator * newnum, self.__denominator * newdenom)
+        self.__check(newnum, newdenom)
+        self.__numerator, self.__denominator = self.__reduced_form(
+                self.__numerator * newnum, self.__denominator * newdenom)
 
 
     def div(self, newnum:int, newdenom:int):
         self.mult(newdenom, newnum)
 
 
-    def reduced_form(self, numer, denom):
+    def __reduced_form(self, numer, denom):
         k = gcd(numer, denom)
         return numer//k, denom//k
 

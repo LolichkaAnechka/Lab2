@@ -1,27 +1,28 @@
 import os
-
+import re
+import string 
 class Text:
     def __init__(self, file_name):
         if not os.path.exists(file_name):
             raise FileNotFoundError("File not found")
-        file = open (file_name)
-        self.text = file.read()
+        self.file = file_name
 
 
     def count_characters(self):
-        return len(self.text)
-
+        with open(self.file, 'r', encoding='utf-8') as file:
+            s = string.whitespace
+            return sum(len(lines)-lines.count(char) for char in s for lines in file)
+         
 
     def count_words(self):
-        return len(self.text.split())
+        with open (self.file, encoding="utf-8") as file:
+            return sum(len(re.findall(r"[a-zA-Zа-яА-ЯёЁіІїЇ0-9]+[,.'-]*[a-zA-Zа-яА-ЯёЁіІєЄїЇ0-9]+", lines)) for lines in file)
 
 
     def count_sentenses(self):
-        count = 0
-        for i in [ '!', '?', '.']:
-            count+=self.text.count(i)
-        return count
-
+        with open (self.file, encoding="utf-8") as file:
+            return sum(len(re.findall(r"[A-ZА-ЯЁІЇ][^\.!?]*[\.!?]+", lines)) for lines in file)
+        
 
 test = Text('text_for_test.txt')
 

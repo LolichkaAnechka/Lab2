@@ -4,48 +4,53 @@
 # are each floating-point numbers larger than 0.0 and less than 20.0.
 
 class Rectangle:
-    def __init__(self, lenght=1, width=1):
-        if not (isinstance(lenght, (int, float)) and isinstance(width, (int, float))):
+    def __init__(self, new_lenght=1, new_width=1):
+        if not (isinstance(new_lenght,(int, float)) and isinstance(new_width,(int, float))):
             raise TypeError("Wrong value type")
-
-        if not (lenght > 0 and width >0):
-            raise ValueError("Wrong value")
-
-        self.lenght, self.width=lenght, width
+        self.__lenght, self.__width=new_lenght, new_width
 
     
     def area(self):
-        return self.width*self.lenght
+        return self.__width*self.__lenght
+        
 
     def perimeter(self):
-        return 2*(self.width + self.lenght)
+        return 2*(self.__width + self.__lenght)
     
 
-    def getData(self):
-        return {'lenght': self.lenght, 'width': self.width}
+    @property
+    def lenght(self):
+        return self.__lenght
+
+
+    @property
+    def width(self):
+        return self.__width
     
 
-    def setLenght(self, newlenght):
-        if not (newlenght >= 0.0 and newlenght <=20.0):
+    @lenght.setter
+    def lenght(self, newlenght):
+        if not (newlenght >= 0.0 and newlenght <=20.0) or not isinstance(newlenght, (int, float)):
             raise ValueError("Wrong value")
-        self.lenght = newlenght
+        self.__lenght = newlenght
             
-    
-    def setWidth(self, newwidth):
-        if not(newwidth >= 0.0 and newwidth <=20.0):
+            
+    @width.setter
+    def width(self, newwidth):
+        if not(newwidth >= 0.0 and newwidth <=20.0) or not isinstance(newwidth, (int, float)):
             raise ValueError("Wrong value")
-        self.width = newwidth
+        self.__width = newwidth
             
 
 x = Rectangle()
-print(x.getData())
-a = Rectangle(13, 15)
+print(x.lenght, x.width)
+a = Rectangle(25, 15)
 
 print(a.area())
 print(a.perimeter())
-a.setLenght(20.1)
-a.setWidth(18)
-print(a.getData())
-print(a.getData())
+a.lenght =20.1
+a.width=18
+print(a.lenght)
+print(a.width)
 
-b= Rectangle(-5, -5)
+# b= Rectangle(-5, -5)
