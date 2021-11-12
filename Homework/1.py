@@ -11,9 +11,9 @@ class Product:
     def __init__(self, price, description, dimentions):
         if not (isinstance(price, int) and isinstance(description, str) and isinstance(dimentions, str)):
             raise TypeError("Wrong value types")
-        self.__price = price
-        self.__description = description
-        self.__dimentions = dimentions
+        self.price = price
+        self.description = description
+        self.dimentions = dimentions
 
     def __str__(self):
         return f"\nProduct: Description - {self.__description}, Price - {self.__price}, Dimentions - {self.__dimentions}"
@@ -60,10 +60,10 @@ class Customer:
         if not(isinstance(new_name, str) and isinstance(new_surname, str) and 
                 isinstance(new_patronymic, str) and isinstance(new_number, str)):
             raise TypeError("Wrong value type")
-        self.__surname = new_surname
-        self.__name = new_name
-        self.__patronymic = new_patronymic
-        self.__phone_number = new_number
+        self.surname = new_surname
+        self.name = new_name
+        self.patronymic = new_patronymic
+        self.phone_number = new_number
 
     def __str__(self):
         return f"Customer:\nName - {self.__name}\nSurname - {self.__surname}\nPatronymic - {self.__patronymic}\nPhone number - {self.__phone_number}"

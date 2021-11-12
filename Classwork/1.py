@@ -5,9 +5,8 @@
 
 class Rectangle:
     def __init__(self, new_lenght=1, new_width=1):
-        if not (isinstance(new_lenght,(int, float)) and isinstance(new_width,(int, float))):
-            raise TypeError("Wrong value type")
-        self.__lenght, self.__width=new_lenght, new_width
+        self.lenght = new_lenght
+        self.width = new_width
 
     
     def area(self):
