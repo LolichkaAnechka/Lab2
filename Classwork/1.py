@@ -4,42 +4,42 @@
 # are each floating-point numbers larger than 0.0 and less than 20.0.
 
 class Rectangle:
-    def __init__(self, new_lenght=1, new_width=1):
-        self.lenght = new_lenght
-        self.width = new_width
+	def __init__(self, new_lenght=1, new_width=1):
+		self.lenght = new_lenght
+		self.width = new_width
 
-    
-    def area(self):
-        return self.__width*self.__lenght
-        
+		
+	def area(self):
+		return self.__width*self.__lenght
+		
 
-    def perimeter(self):
-        return 2*(self.__width + self.__lenght)
-    
+	def perimeter(self):
+		return 2*(self.__width + self.__lenght)
+		
 
-    @property
-    def lenght(self):
-        return self.__lenght
+	@property
+	def lenght(self):
+		return self.__lenght
 
 
-    @property
-    def width(self):
-        return self.__width
-    
+	@property
+	def width(self):
+		return self.__width
+		
 
-    @lenght.setter
-    def lenght(self, newlenght):
-        if not (newlenght >= 0.0 and newlenght <=20.0) or not isinstance(newlenght, (int, float)):
-            raise ValueError("Wrong value")
-        self.__lenght = newlenght
-            
-            
-    @width.setter
-    def width(self, newwidth):
-        if not(newwidth >= 0.0 and newwidth <=20.0) or not isinstance(newwidth, (int, float)):
-            raise ValueError("Wrong value")
-        self.__width = newwidth
-            
+	@lenght.setter
+	def lenght(self, newlenght):
+		if not (newlenght >= 0.0 and newlenght <=20.0) or not isinstance(newlenght, (int, float)):
+			raise ValueError("Wrong value")
+		self.__lenght = newlenght
+			
+			
+	@width.setter
+	def width(self, newwidth):
+		if not(newwidth >= 0.0 and newwidth <=20.0) or not isinstance(newwidth, (int, float)):
+			raise ValueError("Wrong value")
+		self.__width = newwidth
+			
 
 x = Rectangle()
 print(x.lenght, x.width)

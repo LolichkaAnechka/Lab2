@@ -5,133 +5,157 @@
 # - the order must contain data about the customer who carried it out and products. Implement a method for calculating the total order value.
 
 class Product:
-    __price:int
-    __description:str
-    __dimentions:str
-    def __init__(self, price, description, dimentions):
-        if not (isinstance(price, int) and isinstance(description, str) and isinstance(dimentions, str)):
-            raise TypeError("Wrong value types")
-        self.price = price
-        self.description = description
-        self.dimentions = dimentions
+	def __init__(self, price, description, dimentions):
+		self.price = price
+		self.description = description
+		self.dimentions = dimentions
 
-    def __str__(self):
-        return f"\nProduct: Description - {self.__description}, Price - {self.__price}, Dimentions - {self.__dimentions}"
 
-    @property 
-    def price(self):
-        return self.__price
+	def __str__(self):
+		return f"\nProduct: Description - {self.__description}, Price - {self.__price}, Dimentions - {self.__dimentions}"
 
-    @price.setter
-    def price(self, value):
-        if not isinstance(value, int):
-            raise TypeError("Wrong value type")
-        self.__price = value
 
-    @property 
-    def description(self):
-        return self.__description
+	@property 
+	def price(self):
+		return self.__price
 
-    @description.setter
-    def description(self, value):
-        if not isinstance(value, str):
-            raise TypeError("Wrong value type")
-        self.__description = value
 
-    @property 
-    def dimentions(self):
-        return self.__dimentions
+	@price.setter
+	def price(self, value):
+		if not isinstance(value, int):
+			raise TypeError("Wrong value type")
+		self.__price = value
 
-    @dimentions.setter
-    def dimentions(self, value):
-        if not isinstance(value, str):
-            raise TypeError("Wrong value type")
-        self.__dimentions = value
+
+	@property 
+	def description(self):
+		return self.__description
+
+
+	@description.setter
+	def description(self, value):
+		if not isinstance(value, str):
+			raise TypeError("Wrong value type")
+		self.__description = value
+
+
+	@property 
+	def dimentions(self):
+		return self.__dimentions
+
+
+	@dimentions.setter
+	def dimentions(self, value):
+		if not isinstance(value, str):
+			raise TypeError("Wrong value type")
+		self.__dimentions = value
+
 
 class Customer:
-    __surname: str
-    __name: str
-    __patronymic: str
-    __phone_number: str
+	def __init__(self, new_surname: str, new_name: str, 
+				new_patronymic: str, new_number: str):
+		self.surname = new_surname
+		self.name = new_name
+		self.patronymic = new_patronymic
+		self.phone_number = new_number
 
-    def __init__(self, new_surname: str, new_name: str, 
-                new_patronymic: str, new_number: str):
+	def __str__(self):
+		return f"Customer:\nName - {self.__name}\nSurname - {self.__surname}\
+			\nPatronymic - {self.__patronymic}\nPhone number - {self.__phone_number}"
 
-        if not(isinstance(new_name, str) and isinstance(new_surname, str) and 
-                isinstance(new_patronymic, str) and isinstance(new_number, str)):
-            raise TypeError("Wrong value type")
-        self.surname = new_surname
-        self.name = new_name
-        self.patronymic = new_patronymic
-        self.phone_number = new_number
+		
+	@property
+	def name(self):
+		return self.__name
 
-    def __str__(self):
-        return f"Customer:\nName - {self.__name}\nSurname - {self.__surname}\nPatronymic - {self.__patronymic}\nPhone number - {self.__phone_number}"
 
-    
-    @property
-    def name(self):
-        return self.__name
+	@name.setter
+	def name(self, value):
+		if not isinstance(value, str):
+			raise TypeError("Wrong value type")
+		self.__name = value
 
-    @name.setter
-    def name(self, value):
-        if not isinstance(value, str):
-            raise TypeError("Wrong value type")
-        self.__name = value
 
-    @property
-    def surname(self):
-        return self.__surname
+	@property
+	def surname(self):
+		return self.__surname
 
-    @surname.setter
-    def surname(self, value):
-        if not isinstance(value, str):
-            raise TypeError("Wrong value type")
-        self.__surname = value
 
-    @property
-    def patronymic(self):
-        return self.__patronymic
+	@surname.setter
+	def surname(self, value):
+		if not isinstance(value, str):
+			raise TypeError("Wrong value type")
+		self.__surname = value
 
-    @patronymic.setter
-    def patronymic(self, value):
-        if not isinstance(value, str):
-            raise TypeError("Wrong value type")
-        self.__patronymic = value
 
-    @property
-    def phone_number(self):
-        return self.__phone_number
+	@property
+	def patronymic(self):
+		return self.__patronymic
 
-    @phone_number.setter
-    def phone_number(self, value):
-        if not isinstance(value, str):
-            raise TypeError("Wrong value type")
-        self.__phone_number = value
+
+	@patronymic.setter
+	def patronymic(self, value):
+		if not isinstance(value, str):
+			raise TypeError("Wrong value type")
+		self.__patronymic = value
+
+
+	@property
+	def phone_number(self):
+		return self.__phone_number
+
+
+	@phone_number.setter
+	def phone_number(self, value):
+		if not isinstance(value, str):
+			raise TypeError("Wrong value type")
+		self.__phone_number = value
 
 
 
 class Order:
 
-    def __init__(self, customer: Customer,  *args:Product):
-        if not isinstance(customer, Customer) and all(isinstance(args, Product)):
-            raise TypeError("Wrong value type")
-        self.customer = customer
-        self.products_ordered = args
+	def __init__(self, customer: Customer,  *args:Product):
+		self.customer = customer
+		self.products_ordered = args
+
+	@property
+	def customer(self):
+		return self.__customer
 
 
-    def __str__(self):
-        return f'{self.customer} \n {" ".join(map(str, self.products_ordered))}'
-    
+	@customer.setter
+	def customer(self, value):
+		if not isinstance(customer, Customer):
+			raise TypeError("Wrong value type")
+		self.__customer = value
 
-    def count(self) -> int:
-        return sum(i.price for i in self.products_ordered)
+	@property
+	def products_ordered(self):
+		return self.__products_ordered
+
+	@products_ordered.setter
+	def products_ordered(self, value):
+		if not all(isinstance(prod, Product) for prod in value):
+			raise TypeError("Wrong value type")
+		self.__products_ordered = value
+
+
+	def __str__(self):
+		return f'{self.customer} \n {" ".join(map(str, self.products_ordered))}'
+		
+
+	def order_price(self) -> int:
+		"""Returns the sum of prices of all ordered products"""
+		return sum(i.price for i in self.products_ordered)
 
 
 product1 = Product(111, "Stone", '300x300x300')
 product2 = Product(1000, 'Wood', '300x300x300')
 customer = Customer("Gromyako", "Vitaliy", "Yurevich", '88005553535')
 
+print(customer)
+
 order = Order(customer, product1, product2)
 print(order)
-print(f'Full price: {order.count()}')
+print(f'Full price: {order.order_price()}')
